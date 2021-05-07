@@ -19,7 +19,7 @@ public class Main
     GereProduto listaProd = new GereProduto();
     
     System.out.println("1.Cliente\n2.Funcionário\n3. Registar Utilizador");
-    int op1 = input.nextInt();
+    int op1 = input.nextInt();//es gay
     
     while (op1!=0){
         switch(op1){
