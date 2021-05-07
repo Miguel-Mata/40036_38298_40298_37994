@@ -19,7 +19,7 @@ public class Main
     GereProduto listaProd = new GereProduto();
     
     System.out.println("1.Cliente\n2.Funcionário\n3. Registar Utilizador");
-    int op1 = input.nextInt();//cagalhao
+    int op1 = input.nextInt();
     
     while (op1!=0){
         switch(op1){
@@ -78,7 +78,10 @@ public class Main
                             break;
                             
                             case 3:{
+                            	System.out.println("Qual o numero do utilizador que quer consultar?");
+                            	int num = input.nextInt();
                             	
+                            	listaUtil.consultarHistorico(num);
                             }
                             break;
                             
