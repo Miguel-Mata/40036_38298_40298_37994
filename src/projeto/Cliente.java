@@ -22,11 +22,11 @@ public class Cliente extends Utilizador{
 		super(numeroUtil, password, nome);
 		encomendas = new ArrayList<Encomenda>();
 	}
-	
+
 	public void registarEncomenda(Encomenda e) {
 		encomendas.add(e);
 	}
-	
+
 	public Encomenda pesquisarEncomenda(int idEnc){
 		if(encomendas.isEmpty()) {
 			System.out.println("Nao existem encomendas");
@@ -38,22 +38,22 @@ public class Cliente extends Utilizador{
 			}
 		}
 		System.out.println("Nao existe essa encomenda");
-		
+
 		return null;
 	}
-	
+
 	public void alterarEstado() {
 		//TODO fazer
 	}
 
 	public void consultarEstado(int idEnc) {
 		Encomenda e = pesquisarEncomenda(idEnc);
-		
+
 		if(e!=null) {
 			System.out.println(e.getEstado());
 		}
 	}
-	
+
 	public Encomenda historicoCliente() {
 		for(Encomenda e: encomendas) {
 			return e;
@@ -61,4 +61,17 @@ public class Cliente extends Utilizador{
 		return null;
 	}
 	
+	public void melhorCli()
+	{
+		double max = 0;
+		
+		for(Encomenda e: encomendas)
+		{
+			if(e.precoTotal()>max)
+			{
+				max = e.precoTotal();
+			}
+		}
+	}
+
 }

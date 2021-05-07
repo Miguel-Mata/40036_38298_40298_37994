@@ -21,12 +21,12 @@ public class GereProduto {
 	public GereProduto() {
 		produtos = new ArrayList<Produto>();
 	}
-	
+
 
 	public void registarProduto(Produto p) {
 		produtos.add(p);
 	}
-	
+
 	public Produto pesquisarProduto(double id){
 
 		if(produtos.isEmpty()) {
@@ -39,19 +39,19 @@ public class GereProduto {
 			}
 		}
 		System.out.println("Nao existe esse produto");
-		
+
 		return null;
 	}
-		
+
 	public void eliminarProduto(double id) {
 		Produto p = pesquisarProduto(id);
-		
+
 		if(p != null) {
 			produtos.remove(p);
 		}
 	}
-		
-	
+
+
 	public void imprimirTodos() {
 		if(produtos.isEmpty()) {
 			System.out.println("Nao existem produtos");
@@ -62,63 +62,63 @@ public class GereProduto {
 			}
 		}
 	}
-	
-	
-	public void imprimirUm(double id, int quant) {
+
+
+	public void imprimirUm(double id) {
 		Produto p = pesquisarProduto(id);
 		System.out.println(p.toString());
 	}
-	
+
 	public void adicionarStock(double id, int quant) {
 		Produto p = pesquisarProduto(id);
-		
-			if(p!=null) {
-				p.setStock(p.getStock() + quant);
-			}
+
+		if(p!=null) {
+			p.setStock(p.getStock() + quant);
 		}
-	
+	}
+
 	public void removerStock(double id, int quant) {
 		Produto p = pesquisarProduto(id);
-		
+
 		if(p!=null) {
 			p.setStock(p.getStock() - quant);
 		}
 	}
-	
+
 	public void consultarStock(double id) {
 		Produto p = pesquisarProduto(id);
-		
+
 		if(p!=null) {
 			System.out.println(p.toString());
 		}
 	}
-	
+
 	public void compararStock(int idProd, int quant) {
 		Produto p = pesquisarProduto(idProd);
-		
+
 		if(p!=null) {
 			if(quant>p.getStock()) {
 				System.out.println("A quantidade excede o stock. Quer:\n1."+ p.getStock() + " unidades\n2.Nenhuma unidade");
 				int op = input.nextInt();
-				
+
 				if(op==1) {
 					removerStock(idProd, quant);
 				}
 			}
 		}
 	}
-	
+
 	public void maisVendido() {
 		//TODO fazer
 	}
-	
+
 	public void consultarPreco(double id) {
 		Produto p = pesquisarProduto(id);
-			
+
 		if(p!=null) {
 			System.out.println("Preco do produto = " + p.getPreco());
 		}
 	}
-	
-	
+
+
 }
