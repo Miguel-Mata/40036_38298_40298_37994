@@ -17,7 +17,7 @@ public class Produto {
 	private LocalDate dataRegisto;
 	private LocalDate dataValidade;
 	private String tipo;
-	
+
 	/**
 	 * @param id
 	 * @param nome
@@ -52,8 +52,8 @@ public class Produto {
 	public LocalDate getDataRegisto() {
 		return dataRegisto;
 	}
-	
-	
+
+
 
 	/**
 	 * @return the stock
@@ -86,9 +86,9 @@ public class Produto {
 		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", stock=" + stock + ", dataRegisto="
 				+ dataRegisto + ", dataValidade=" + dataValidade + ", tipo=" + tipo + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

@@ -12,7 +12,7 @@ public class Utilizador
 	private int numeroUtil;
 	private String password;
 	private String nome;
-	
+
 	/**
 	 * @param numeroUtil
 	 * @param password
@@ -28,7 +28,12 @@ public class Utilizador
 	 */
 	public int getNumeroUtil() {
 		return numeroUtil;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilizador [numeroUtil=" + numeroUtil + ", password=" + password + ", nome=" + nome + "]";
 	}	
-	
-	
+
+
 }

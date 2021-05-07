@@ -13,27 +13,25 @@ import java.util.Random;
  */
 public class Encomenda {
 	private int idEnc;
-	private LocalDateTime dataLevantamento;
-	private double precoTotal;
+	private LocalDate dataLevantamento;
 	private String estado;
 	private ArrayList<DetalhesEncomenda> detalhesE;
-	
+	private static int id = 0;
+
 	/**
 	 * @param dataLevantamento
 	 * @param precoTotal
 	 * @param estado
 	 * @param linhasE
 	 */
-	
-	public Encomenda(LocalDateTime dataLevantamento, double precoTotal, String estado) {
-		Random random = new Random();
-		idEnc += random.nextInt(10000);
+
+	public Encomenda(LocalDate dataLevantamento) {
+		idEnc = this.idEnc++;
 		this.dataLevantamento = dataLevantamento;
-		this.precoTotal = precoTotal;
 		this.estado = "Recebida";
 		detalhesE = new ArrayList<DetalhesEncomenda>();
 	}
-	
+
 	public void registarDetalhes(DetalhesEncomenda d) {
 		detalhesE.add(d);
 	}
@@ -52,11 +50,21 @@ public class Encomenda {
 		return estado;
 	}
 
+	public double precoTotal()
+	{
+		double var = 0;
+		for(DetalhesEncomenda d: detalhesE)
+		{
+			var += d.calcularPrecoTotal();
+		}
+		return var;
+	}
+
 	@Override
 	public String toString() {
-		return "Encomenda [idEnc=" + idEnc + ", dataLevantamento=" + dataLevantamento + ", precoTotal=" + precoTotal
-				+ ", estado=" + estado + ", detalhesE=" + detalhesE + "]";
+		return "Encomenda [idEnc=" + idEnc + ", dataLevantamento=" + dataLevantamento + ", precoTotal=" + this.precoTotal()
+		+ ", estado=" + estado + ", detalhesE=" + detalhesE + "]";
 	}
-	
-	
+
+
 }

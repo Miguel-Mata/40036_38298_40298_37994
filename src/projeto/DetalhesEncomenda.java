@@ -18,6 +18,10 @@ public class DetalhesEncomenda {
 		this.produto = produto;
 		this.quantidade = quantidade;
 	}
-	
-	
+
+	public double calcularPrecoTotal()
+	{
+		return this.produto.getPreco() * this.quantidade;
+	}
+
 }
