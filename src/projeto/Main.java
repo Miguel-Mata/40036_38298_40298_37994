@@ -86,7 +86,7 @@ public class Main
 		System.out.println("Qual a password?");
 		int password = input.nextInt();
 
-		if(listaUtil.pesquisarUtilizador(numeroUtil)!=null) {
+		if((listaUtil.verificaLogin(numeroUtil, password)!=null)) {
 			System.out.println("1. Realizar Encomenda");
 			System.out.println("2. Imprimir lista de produtos");
 			System.out.println("3. Pesquisar um produto");
@@ -134,10 +134,30 @@ public class Main
 		}
 	}
 	
+	public static void registaPrimeiro(GereUtilizador listaUtil)
+	{
+		Utilizador novoUtil;
+		System.out.println("A registar o primeiro funcionario");
+		
+		System.out.println("Qual o numero do Funcionario");
+		int num = input.nextInt();
+
+		System.out.println("Qual a password que quer inserir?");
+		String password = inputString.next();
+
+		System.out.println("Qual o nome do utilizador?");
+		String nome = inputString.next();
+		
+		novoUtil = new Utilizador(num, password, nome);
+		
+		listaUtil.registarUtilizador(novoUtil);
+
+		System.out.println("Funcionario registado com sucesso");
+	}
 	public static void registarCliente(GereUtilizador listaUtil)
 	{
 		Utilizador novoUtil;
-
+		
 		System.out.println("Qual o numero do utilizador");
 		int num = input.nextInt();
 
@@ -162,6 +182,7 @@ public class Main
 		listaUtil.registarUtilizador(novoUtil);
 
 		System.out.println("Utilizador registado com sucesso");
+		
 	}
 	public static void eliminarCliente(GereUtilizador listaUtil)
 	{
@@ -169,8 +190,6 @@ public class Main
 		int num = input.nextInt();
 
 		listaUtil.eliminarUtilizador(num);
-
-		System.out.println("Utilizador eliminado com sucesso");
 	}
 	public static void registarProduto(GereProduto listaProd)
 	{
@@ -179,12 +198,17 @@ public class Main
 	}	
 	public static void trataFunc(GereUtilizador listaUtil, GereProduto listaProd)
 	{
+		
+		
+		System.out.println("\nLogin\n");
+		
 		System.out.println("Qual o numero de utilizador do Funcionario?");
 		int numeroUtil = input.nextInt();
 
 		System.out.println("Qual a password?");
 		int password = input.nextInt();
 		
+		if(listaUtil.verificaLogin(numeroUtil, password)!=null) {
 		System.out.println("\n");
 		System.out.println("---------------------Cliente---------------");
 		System.out.println("1. Registar cliente");
@@ -209,8 +233,7 @@ public class Main
 		System.out.println("18. Produto mais vendido");
 		System.out.println("0. Terminar");
 		System.out.println("Introduza opção:");
-		int op;
-		op = input.nextInt();
+		int op = input.nextInt();
 
 		while (op!=0)
 		{
@@ -246,7 +269,7 @@ public class Main
 
 			case 5:
 			{
-				System.out.println("A imprimir lista de clientes");
+				System.out.println("A imprimir lista de pessoas");
 				listaUtil.imprimirTodos();
 			}break;
 
@@ -356,12 +379,16 @@ public class Main
 			
 			default: System.out.println("Escolha uma opcao valida");
 			}
+			}
 		}
 	}
+	
 	public static void main(String[] args){
 		GereUtilizador listaUtil = new GereUtilizador();
 		GereProduto listaProd = new GereProduto();
 
+		Main.registaPrimeiro(listaUtil);
+		
 		System.out.println("1.Cliente\n2.Funcionário\n0. sair");
 		int op1 = input.nextInt();
 
@@ -381,7 +408,7 @@ public class Main
 					System.out.println("Escolha uma opcao valida");
 				}
 			
-			System.out.println("1.Cliente\n2.Funcionário\n3. Registar Utilizador\n0. sair");
+			System.out.println("1.Cliente\n2.Funcionário\n0. sair");
 			op1 = input.nextInt();
 			}//fim switch
 

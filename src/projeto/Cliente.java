@@ -74,4 +74,10 @@ public class Cliente extends Utilizador{
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Cliente [toString()=" + super.toString() + "]";
+	}
+		
+
 }

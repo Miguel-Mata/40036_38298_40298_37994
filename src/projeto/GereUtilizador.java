@@ -34,12 +34,23 @@ public class GereUtilizador {
 
 		return null;
 	}
+	
+	public Utilizador verificaLogin(int numUtil, int password)
+	{
+		for(Utilizador u: utilizadores) {
+			if(u.getNumeroUtil()==numUtil) {
+				return u;
+			}
+		}
+		return null;
+	}
 
 	public void eliminarUtilizador(int numUtil) {
 		Utilizador u = pesquisarUtilizador(numUtil);
 
 		if(u!=null) {
-			utilizadores.remove(numUtil);
+			utilizadores.remove(u);
+			System.out.println("Utilizador eliminado com sucesso");
 		}
 	}
 
@@ -48,8 +59,19 @@ public class GereUtilizador {
 			System.out.println("Nao existem utilizadores");
 		}
 		else{
+			
 			for(Utilizador u: utilizadores) {
-				System.out.println(u.toString());
+				if(u instanceof Cliente)
+				{
+					System.out.println("Clientes");
+					System.out.println(u.toString());
+				}
+				else
+				{
+					System.out.println("Funcionarios");
+					System.out.println(u.toString());
+				}
+				
 			}
 		}
 	}
@@ -93,6 +115,12 @@ public class GereUtilizador {
 	
 	public void melhorCliente()
 	{
-		
+		for(Utilizador u: utilizadores)
+		{
+			if(u instanceof Cliente)
+			{
+				((Cliente) u).melhorCli();
+			}
+		}
 	}
 }

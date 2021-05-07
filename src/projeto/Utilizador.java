@@ -28,6 +28,11 @@ public class Utilizador
 	 */
 	public int getNumeroUtil() {
 		return numeroUtil;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilizador [numeroUtil=" + numeroUtil + ", password=" + password + ", nome=" + nome + "]";
 	}	
 
 
