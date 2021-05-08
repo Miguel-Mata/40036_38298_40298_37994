@@ -85,11 +85,22 @@ public class GereProduto {
 		}
 	}
 
-	public void consultarStock(double id) {
+	public void consultarStockEspecifico(double id) {
 		Produto p = pesquisarProduto(id);
 
 		if(p!=null) {
 			System.out.println(p.toString());
+		}
+	}
+	
+	public void imprimirTodoStock() {
+		if(produtos.isEmpty()) {
+			System.out.println("Nao existem produtos");
+		}
+		else{
+			for(Produto p: produtos) {
+				System.out.println(p.getStock());
+			}
 		}
 	}
 
@@ -117,6 +128,17 @@ public class GereProduto {
 
 		if(p!=null) {
 			System.out.println("Preco do produto = " + p.getPreco());
+		}
+	}
+	
+	public void imprimirTodoPreco() {
+		if(produtos.isEmpty()) {
+			System.out.println("Nao existem produtos");
+		}
+		else{
+			for(Produto p: produtos) {
+				System.out.println(p.getPreco());
+			}
 		}
 	}
 

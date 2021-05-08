@@ -15,7 +15,7 @@ public class Main
 	public static Scanner input = new Scanner (System.in);
 	public static Scanner inputString = new Scanner(System.in);
 
-	//INICIO CLIENTE
+	//INICIO FUNCOES CLIENTE
 	public static void pesquisarProduto(GereProduto listaProd)
 	{
 		System.out.println("Qual o id do produto que pretende procurar?");
@@ -129,9 +129,56 @@ public class Main
 			}
 		}
 	}
-	//FIM CLIENTE
+	//FIM FUNCOES CLIENTE
 
-	//INICIO FUNCIONARIO
+	//INICIO FUNCOES FUNCIONARIO
+	public static void consultarPrecoEspecifico(GereProduto listaProd) {
+		System.out.println("Qual o id do produto que quer consultar?");
+		int idProd = input.nextInt();
+		
+		listaProd.consultarPreco(idProd);
+	}
+	public static void imprimirTodoPreco(GereProduto listaProd) {
+		listaProd.imprimirTodoPreco();
+	}
+	public static void atualizarStock(GereProduto listaProd) {
+		System.out.println("Pretende:\n1. Adicionar Stock\n 2. Removar stock");
+		int escolha = input.nextInt();
+		
+		if(escolha==1) {
+			System.out.println("Qual o id do produto a que quer adicionar stock?");
+			int idProd = input.nextInt();
+			
+			System.out.println("Que quantidade quer adicionar ao stock desse produto?");
+			int add = input.nextInt();
+			
+			listaProd.adicionarStock(idProd, add);
+		}
+		else {
+			System.out.println("Qual o id do produto a que quer remover stock?");
+			int idProd = input.nextInt();
+			
+			System.out.println("Que quantidade quer remover ao stock desse produto?");
+			int remove = input.nextInt();
+			
+			listaProd.removerStock(idProd, remove);
+		}
+	}
+	public static void imprimirTodoStock(GereProduto listaProd) {
+		listaProd.imprimirTodoStock();
+	}
+	public static void eliminarProduto(GereProduto listaProd) {
+		System.out.println("Qual o id do produto que quer eliminar?");
+		int idProd = input.nextInt();
+		
+		listaProd.eliminarProduto(idProd);
+	}
+	public static void consultarStockEspecifico(GereProduto listaProd) {
+		System.out.println("Qual o id do produto que quer consultar?");
+		int idProd = input.nextInt();
+		
+		listaProd.consultarStockEspecifico(idProd);
+	}
 	public static void registarPagamento(GereUtilizador listaUtil) {
 		System.out.println("Qual o numero da encomenda que pretende pagar?");
 		int idEnc = input.nextInt();
@@ -232,17 +279,17 @@ public class Main
 		int stock = input.nextInt();
 
 		System.out.println("Qual a data de validade do produto? Formato AAAA-MM-DDh");
-		String data = inputString.next();
-		LocalDate date = LocalDate.parse(data);
+		String dataValidade = inputString.next();
+		LocalDate date = LocalDate.parse(dataValidade);
 		
 		System.out.println("Qual o tipo de produto? Horticola ou Fruticola");
-		int tipo = input.nextInt();
-
-		//NAO SEI COMO FAZER A DATA REGISTO
+		String tipo = inputString.next();
 		
-		listaUtil.registarUtilizador(novoUtil);
+		novoProd = new Produto(nome, preco, stock, date, tipo);
+		
+		listaProd.registarProduto(novoProd);
 
-		System.out.println("Utilizador registado com sucesso");
+		System.out.println("Produto registado com sucesso");
 
 	}	
 	public static void trataFunc(GereUtilizador listaUtil, GereProduto listaProd)
@@ -330,79 +377,52 @@ public class Main
 
 				case 9:
 				{
-					
+					Main.registarProduto(listaProd);
 				}break;
 
 				case 10:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.eliminarProduto(listaProd);
 				}break;
 
 				case 11:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.imprimirTodoStock(listaProd);
 				}break;
 
 				case 12:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.consultarStockEspecifico(listaProd);
 				}break;
 
 				case 13:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.atualizarStock(listaProd);
 				}break;
 
 				case 14:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.imprimirTodoPreco(listaProd);
 				}break;
 
 				case 15:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.consultarPrecoEspecifico(listaProd);
 				}break;
 
 				case 16:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.imprimirTodosProdutos(listaProd);
 				}break;
 
 				case 17:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					Main.pesquisarProduto(listaProd);
 				}break;
 
 				case 18:
 				{
-					System.out.println("Qual o numero de utilizador que pretende consultar?");
-					int num = input.nextInt();
-
-					listaUtil.consultarHistorico(num);
+					//TODO
 				}break;
 
 				default: System.out.println("Escolha uma opcao valida");
@@ -410,7 +430,8 @@ public class Main
 			}
 		}
 	}
-
+	//FIM FUNCOES FUNCIONARIO
+	
 	public static void main(String[] args){
 		GereUtilizador listaUtil = new GereUtilizador();
 		GereProduto listaProd = new GereProduto();

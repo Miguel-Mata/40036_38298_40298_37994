@@ -14,7 +14,7 @@ public class Produto {
 	private String nome;
 	private double preco;
 	private int stock;
-	private LocalDate dataRegisto;
+	private LocalDateTime dataRegisto;
 	private LocalDate dataValidade;
 	private String tipo;
 	private static int id = 0;
@@ -27,12 +27,12 @@ public class Produto {
 	 * @param dataRegisto
 	 * @param dataValidade
 	 */
-	public Produto(String nome, double preco, int stock, LocalDate dataRegisto, LocalDate dataValidade, String tipo) {
+	public Produto(String nome, double preco, int stock, LocalDate dataValidade, String tipo) {
 		idProd = this.id++;
 		this.nome = nome;
 		this.preco = preco;
 		this.stock = stock;
-		this.dataRegisto = dataRegisto;
+		this.dataRegisto = LocalDateTime.now();;
 		this.dataValidade = dataValidade;
 		this.tipo = tipo;
 	}
@@ -50,7 +50,7 @@ public class Produto {
 	/**
 	 * @return the dataRegisto
 	 */
-	public LocalDate getDataRegisto() {
+	public LocalDateTime getDataRegisto() {
 		return dataRegisto;
 	}
 
