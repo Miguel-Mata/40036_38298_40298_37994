@@ -26,7 +26,7 @@ public class Encomenda {
 	 */
 
 	public Encomenda(LocalDate dataLevantamento) {
-		idEnc = this.idEnc++;
+		idEnc = this.id++;
 		this.dataLevantamento = dataLevantamento;
 		this.estado = "Recebida";
 		detalhesE = new ArrayList<DetalhesEncomenda>();
