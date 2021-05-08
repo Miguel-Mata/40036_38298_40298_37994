@@ -17,7 +17,19 @@ public class GereUtilizador {
 	}
 
 	public void registarUtilizador(Utilizador u) {
-		utilizadores.add(u);
+		if(!verificarIdUtil(u.getNumeroUtil())) {
+			utilizadores.add(u);
+			System.out.println("Utilizador registado com sucesso");
+		}
+	}
+	
+	public boolean verificarIdUtil(int idUtil) {
+		for(Utilizador u: utilizadores) {
+			if(u.getNumeroUtil()==idUtil) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public Utilizador pesquisarUtilizador(int numUtil) {
@@ -35,12 +47,27 @@ public class GereUtilizador {
 		return null;
 	}
 
-	public Utilizador verificaLogin(int numUtil, int password) {
+	public Utilizador verificaLoginFunc(int numUtil, int password) {
 		for (Utilizador u : utilizadores) {
-			if (u.getNumeroUtil() == numUtil) {
-				return u;
+			if(!(u instanceof Cliente)) {
+				if (u.getNumeroUtil() == numUtil) {
+					return u;
+				}
 			}
 		}
+		System.out.println("Nao existe esse funcionario");
+		return null;
+	}
+	
+	public Utilizador verificaLoginCliente(int numUtil, int password) {
+		for (Utilizador u : utilizadores) {
+			if(u instanceof Cliente) {
+				if (u.getNumeroUtil() == numUtil) {
+					return u;
+				}
+			}
+		}
+		System.out.println("Nao existe esse cliente");
 		return null;
 	}
 
@@ -119,11 +146,20 @@ public class GereUtilizador {
 	}
 
 	public void melhorCliente() {
+		double precoMax = 0;
+		String nomeMax = "";
+		int numMax = 0;
+		
 		for (Utilizador u : utilizadores) {
 			if (u instanceof Cliente) {
-				System.out.println(((Cliente) u).melhorCli());
+				if(((Cliente) u).calcularTotalEncomendasCliente()>precoMax) {
+					precoMax = ((Cliente) u).calcularTotalEncomendasCliente();
+					nomeMax = u.getNome();
+					numMax = u.getNumeroUtil();
+				}
 			}
 		}
+		System.out.println("O melhor cliente foi o " + numMax + " cujo nome e " + nomeMax + " e gastou " + precoMax);
 	}
 
 	public void registarPagamento(int idEnc) {

@@ -98,20 +98,16 @@ public class GereProduto {
 		}
 	}
 
-	public void compararStock(int idProd, int quant) {
+	public boolean compararStock(int idProd, int quant) {
 		Produto p = pesquisarProduto(idProd);
 
 		if (p != null) {
 			if (quant > p.getStock()) {
-				System.out.println(
-						"A quantidade excede o stock. Quer:\n1." + p.getStock() + " unidades\n2.Nenhuma unidade");
-				int op = input.nextInt();
-
-				if (op == 1) {
-					removerStock(idProd, quant);
-				}
+				return false;
 			}
+			return true;
 		}
+		return false;
 	}
 
 	public void maisVendido() {

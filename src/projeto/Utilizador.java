@@ -28,6 +28,15 @@ public class Utilizador {
 	public int getNumeroUtil() {
 		return numeroUtil;
 	}
+	
+	
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
 
 	@Override
 	public String toString() {

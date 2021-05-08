@@ -46,29 +46,52 @@ public class Main {
 		System.out.println("A realizar encomenda");
 
 		Encomenda newEncomenda;
+		
 
 		System.out.println("Quantos produtos diferentes quer");
 		int prods = input.nextInt();
+		
+		System.out.println("Qual a data para levantar? Formato AAAA-MM-DD. Minimo 24h");
+		String data = inputString.next();
+		LocalDate date = LocalDate.parse(data);
+		
+		newEncomenda = new Encomenda(date);
 
 		for (int i = 0; i < prods; i++) {
+			
 			listaProd.imprimirTodos();
 
 			System.out.println("Qual o ID do produto que quer?");
 			int id = input.nextInt();
+			
+			Produto p = listaProd.pesquisarProduto(id);
 
 			System.out.println("Qual a quantidade do produto que quer?");
 			int quant = input.nextInt();
-
-			System.out.println("Qual a data para levantar? Formato AAAA-MM-DD. Minimo 24h");
-			String data = inputString.next();
-			LocalDate date = LocalDate.parse(data);
-
-			newEncomenda = new Encomenda(date);
-
-			listaProd.compararStock(id, quant);
-
+			
+			if(listaProd.compararStock(id, quant)) {
+				DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, quant);
+				
+				newEncomenda.registarDetalhes(newDetalhes);
+			}
+			else {
+				System.out.println("A quantidade excede o stock. Quer:\n1." + p.getStock() + " unidades\n2.Nenhuma unidade");
+				int op = input.nextInt();
+				
+				if (op == 1) {
+					listaProd.removerStock(id, p.getStock());
+					
+					DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, p.getStock());
+					
+					newEncomenda.registarDetalhes(newDetalhes);
+				}
+			}
+		}
+		if(newEncomenda.getDetalhesE().size()!=0) {
 			listaUtil.realizarEncomenda(newEncomenda, numeroUtil);
-
+		}
+		else {
+			System.out.println("Encomenda vazia - Nao validada");
 		}
 	}
 
@@ -80,7 +103,7 @@ public class Main {
 		System.out.println("Qual a password?");
 		int password = input.nextInt();
 
-		if ((listaUtil.verificaLogin(numeroUtil, password) != null)) {
+		if ((listaUtil.verificaLoginCliente(numeroUtil, password) != null)) {
 			System.out.println("1. Realizar Encomenda");
 			System.out.println("2. Imprimir lista de produtos");
 			System.out.println("3. Pesquisar um produto");
@@ -97,33 +120,42 @@ public class Main {
 				case 1: {
 					Main.realizarEncomenda(listaUtil, listaProd, numeroUtil);
 				}
-					break;
+				break;
 
 				case 2: {
 					Main.imprimirTodosProdutos(listaProd);
 				}
-					break;
+				break;
 
 				case 3: {
 					Main.pesquisarProduto(listaProd);
 				}
-					break;
+				break;
 
 				case 4: {
 					Main.consultarEstado(listaUtil);
 				}
-					break;
+				break;
 
 				case 5: {
 					Main.consultarHistorico(listaUtil, numeroUtil);
 				}
-					break;
+				break;
 
 				case 6: {
 					Main.detalhesCliente(listaUtil, numeroUtil);
 				}
-					break;
+				break;
 				}
+				System.out.println("1. Realizar Encomenda");
+				System.out.println("2. Imprimir lista de produtos");
+				System.out.println("3. Pesquisar um produto");
+				System.out.println("4. Consultar estado encomenda");
+				System.out.println("5. Consultar histórico encomendas do cliente");
+				System.out.println("6. Imprimir detalhes do cliente");
+				System.out.println("0. Terminar");
+				System.out.println("Introduza opção:");
+				op = input.nextInt();
 			}
 		}
 	}
@@ -259,9 +291,6 @@ public class Main {
 		}
 
 		listaUtil.registarUtilizador(novoUtil);
-
-		System.out.println("Utilizador registado com sucesso");
-
 	}
 
 	public static void eliminarCliente(GereUtilizador listaUtil) {
@@ -308,7 +337,7 @@ public class Main {
 		System.out.println("Qual a password?");
 		int password = input.nextInt();
 
-		if (listaUtil.verificaLogin(numeroUtil, password) != null) {
+		if (listaUtil.verificaLoginFunc(numeroUtil, password) != null) {
 			System.out.println("\n");
 			System.out.println("---------------------Cliente---------------");
 			System.out.println("1. Registar utilizador");
@@ -319,7 +348,6 @@ public class Main {
 			System.out.println("6. Imprimir encomendas de um cliente");
 			System.out.println("7. Imprimir todas as encomendas");
 			System.out.println("8. Registar pagamento");
-			System.out.println("\n");
 			System.out.println("-----------------Produto--------------");
 			System.out.println("9. Registar produto");
 			System.out.println("10. Eliminar produto");
@@ -340,97 +368,121 @@ public class Main {
 				case 1: {
 					Main.registarCliente(listaUtil);
 				}
-					break;
+				break;
 
 				case 2: {
 					Main.eliminarCliente(listaUtil);
 				}
-					break;
+				break;
 
 				case 3: {
 					Main.melhorCliente(listaUtil);
 				}
-					break;
+				break;
 
 				case 4: {
 					Main.imprimirUmUtil(listaUtil);
 				}
-					break;
+				break;
 
 				case 5: {
 					Main.imprimirTodosUtil(listaUtil);
 				}
-					break;
+				break;
 
 				case 6: {
 					Main.consultarHistoricoEspecifico(listaUtil);
 				}
-					break;
+				break;
 
 				case 7: {
 					Main.imprimirTodasEncomendas(listaUtil);
 				}
-					break;
+				break;
 
 				case 8: {
 					Main.registarPagamento(listaUtil);
 				}
-					break;
+				break;
 
 				case 9: {
 					Main.registarProduto(listaProd);
 				}
-					break;
+				break;
 
 				case 10: {
 					Main.eliminarProduto(listaProd);
 				}
-					break;
+				break;
 
 				case 11: {
 					Main.imprimirTodoStock(listaProd);
 				}
-					break;
+				break;
 
 				case 12: {
 					Main.consultarStockEspecifico(listaProd);
 				}
-					break;
+				break;
 
 				case 13: {
 					Main.atualizarStock(listaProd);
 				}
-					break;
+				break;
 
 				case 14: {
 					Main.imprimirTodoPreco(listaProd);
 				}
-					break;
+				break;
 
 				case 15: {
 					Main.consultarPrecoEspecifico(listaProd);
 				}
-					break;
+				break;
 
 				case 16: {
 					Main.imprimirTodosProdutos(listaProd);
 				}
-					break;
+				break;
 
 				case 17: {
 					Main.pesquisarProduto(listaProd);
 				}
-					break;
+				break;
 
 				case 18: {
 					// TODO
 				}
-					break;
+				break;
 
 				default:
 					System.out.println("Escolha uma opcao valida");
 				}
-			}
+				System.out.println("\n");
+				System.out.println("---------------------Cliente---------------");
+				System.out.println("1. Registar utilizador");
+				System.out.println("2. Eliminar utilizador");
+				System.out.println("3. Melhor cliente");
+				System.out.println("4. Imprimir detalhes de um utilizador");
+				System.out.println("5. Imprimir lista de utilizadores");
+				System.out.println("6. Imprimir encomendas de um cliente");
+				System.out.println("7. Imprimir todas as encomendas");
+				System.out.println("8. Registar pagamento");
+				System.out.println("-----------------Produto--------------");
+				System.out.println("9. Registar produto");
+				System.out.println("10. Eliminar produto");
+				System.out.println("11. Consultar o stock de todos os produtos");
+				System.out.println("12. Consultar o stock de um produto");
+				System.out.println("13. Atualizar stock");
+				System.out.println("14. Consultar preco de todos os produtos");
+				System.out.println("15. Consultar preco de um produto");
+				System.out.println("16. Imprimir todos os produtos");
+				System.out.println("17. Imprimir um produto");
+				System.out.println("18. Produto mais vendido");
+				System.out.println("0. Terminar");
+				System.out.println("Introduza opção:");
+				op = input.nextInt();
+			}//fim while
 		}
 	}
 	// FIM FUNCOES FUNCIONARIO
@@ -449,21 +501,20 @@ public class Main {
 			case 1: {
 				Main.trataCliente(listaUtil, listaProd);
 			}
-				break;
+			break;
 
 			case 2: {
 				Main.trataFunc(listaUtil, listaProd);
 			}
-				break;
+			break;
 
 			default: {
 				System.out.println("Escolha uma opcao valida");
 			}
-
-				System.out.println("1.Cliente\n2.Funcionário\n0. sair");
-				op1 = input.nextInt();
 			}// fim switch
 
+			System.out.println("1.Cliente\n2.Funcionário\n0. sair");
+			op1 = input.nextInt();
 		} // fim while
 	}
 }// fim main//fim classe

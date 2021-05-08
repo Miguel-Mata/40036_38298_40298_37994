@@ -71,15 +71,13 @@ public class Cliente extends Utilizador {
 		return null;
 	}
 
-	public double melhorCli() {
-		double max = 0;
+	public double calcularTotalEncomendasCliente() {
+		double soma = 0;
 
 		for (Encomenda e : encomendas) {
-			if (e.precoTotal() > max) {
-				max = e.precoTotal();
-			}
+			soma += e.precoTotal();
 		}
-		return max;
+		return soma;
 	}
 
 	@Override

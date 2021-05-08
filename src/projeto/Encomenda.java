@@ -65,6 +65,15 @@ public class Encomenda {
 		return var;
 	}
 
+	
+	
+	/**
+	 * @return the detalhesE
+	 */
+	public ArrayList<DetalhesEncomenda> getDetalhesE() {
+		return detalhesE;
+	}
+
 	@Override
 	public String toString() {
 		return "Encomenda [idEnc=" + idEnc + ", dataLevantamento=" + dataLevantamento + ", precoTotal="
