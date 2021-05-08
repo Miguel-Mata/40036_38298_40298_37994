@@ -7,8 +7,7 @@ package projeto;
  * @author 40036_38298_40298_37994
  *
  */
-public class Utilizador 
-{
+public class Utilizador {
 	private int numeroUtil;
 	private String password;
 	private String nome;
@@ -33,7 +32,6 @@ public class Utilizador
 	@Override
 	public String toString() {
 		return "Utilizador [numeroUtil=" + numeroUtil + ", password=" + password + ", nome=" + nome + "]";
-	}	
-
+	}
 
 }

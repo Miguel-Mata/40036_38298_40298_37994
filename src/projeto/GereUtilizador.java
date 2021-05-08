@@ -6,7 +6,7 @@ package projeto;
 import java.util.ArrayList;
 
 /**
- * @author migue
+ * @author 40036_38298_40298_37994
  *
  */
 public class GereUtilizador {
@@ -20,13 +20,13 @@ public class GereUtilizador {
 		utilizadores.add(u);
 	}
 
-	public Utilizador pesquisarUtilizador(int numUtil){
-		if(utilizadores.isEmpty()) {
+	public Utilizador pesquisarUtilizador(int numUtil) {
+		if (utilizadores.isEmpty()) {
 			System.out.println("Nao existem utilizadores");
 			return null;
 		}
-		for(Utilizador u: utilizadores) {
-			if(u.getNumeroUtil()==numUtil) {
+		for (Utilizador u : utilizadores) {
+			if (u.getNumeroUtil() == numUtil) {
 				return u;
 			}
 		}
@@ -34,11 +34,10 @@ public class GereUtilizador {
 
 		return null;
 	}
-	
-	public Utilizador verificaLogin(int numUtil, int password)
-	{
-		for(Utilizador u: utilizadores) {
-			if(u.getNumeroUtil()==numUtil) {
+
+	public Utilizador verificaLogin(int numUtil, int password) {
+		for (Utilizador u : utilizadores) {
+			if (u.getNumeroUtil() == numUtil) {
 				return u;
 			}
 		}
@@ -48,50 +47,42 @@ public class GereUtilizador {
 	public void eliminarUtilizador(int numUtil) {
 		Utilizador u = pesquisarUtilizador(numUtil);
 
-		if(u!=null) {
+		if (u != null) {
 			utilizadores.remove(u);
 			System.out.println("Utilizador eliminado com sucesso");
 		}
 	}
 
 	public void imprimirTodosUtil() {
-		if(utilizadores.isEmpty()) {
+		if (utilizadores.isEmpty()) {
 			System.out.println("Nao existem utilizadores");
-		}
-		else{
-			
-			for(Utilizador u: utilizadores) {
-				if(u instanceof Cliente)
-				{
+		} else {
+
+			for (Utilizador u : utilizadores) {
+				if (u instanceof Cliente) {
 					System.out.println("Clientes");
 					System.out.println(u.toString());
-				}
-				else
-				{
+				} else {
 					System.out.println("Funcionarios");
 					System.out.println(u.toString());
 				}
-				
+
 			}
 		}
 	}
-	
+
 	public void imprimirTodosEnc() {
-		if(utilizadores.isEmpty()) {
+		if (utilizadores.isEmpty()) {
 			System.out.println("Nao existem utilizadores");
-		}
-		else{
-			for(Utilizador u: utilizadores) {
-				if(u instanceof Cliente)
-				{
+		} else {
+			for (Utilizador u : utilizadores) {
+				if (u instanceof Cliente) {
 					System.out.println("Encomendas");
 					System.out.println(((Cliente) u).historicoCliente());
 				}
 			}
 		}
 	}
-	
-	
 
 	public void imprimirUmUtil(int num) {
 		Utilizador u = pesquisarUtilizador(num);
@@ -99,51 +90,45 @@ public class GereUtilizador {
 	}
 
 	public void consultarHistorico(int numUtil) {
-		for(Utilizador u: utilizadores) {
-			if(u instanceof Cliente) {
-				if(u.getNumeroUtil()==numUtil) {
+		for (Utilizador u : utilizadores) {
+			if (u instanceof Cliente) {
+				if (u.getNumeroUtil() == numUtil) {
 					System.out.println(((Cliente) u).historicoCliente());
 				}
 			}
 		}
 	}
-	
-	public void consultarEstado(int id)
-	{
-		for (Utilizador u: utilizadores)
-		{
-			if(u instanceof Cliente)
-			{
+
+	public void consultarEstado(int id) {
+		for (Utilizador u : utilizadores) {
+			if (u instanceof Cliente) {
 				((Cliente) u).consultarEstado(id);
 			}
 		}
-		
+
 	}
 
 	public void realizarEncomenda(Encomenda e, int numUtil) {
-		for(Utilizador u: utilizadores) {
-			if(u instanceof Cliente) {
-				if(u.getNumeroUtil()==numUtil) {
+		for (Utilizador u : utilizadores) {
+			if (u instanceof Cliente) {
+				if (u.getNumeroUtil() == numUtil) {
 					((Cliente) u).registarEncomenda(e);
 				}
 			}
 		}
 	}
-	
-	public void melhorCliente()
-	{
-		for(Utilizador u: utilizadores)
-		{
-			if(u instanceof Cliente)
-			{
+
+	public void melhorCliente() {
+		for (Utilizador u : utilizadores) {
+			if (u instanceof Cliente) {
 				System.out.println(((Cliente) u).melhorCli());
 			}
 		}
 	}
-	
+
 	public void registarPagamento(int idEnc) {
-		for(Utilizador u: utilizadores) {
-			if(u instanceof Cliente) {
+		for (Utilizador u : utilizadores) {
+			if (u instanceof Cliente) {
 				((Cliente) u).pesquisarEncomenda(idEnc);
 				((Cliente) u).alterarEstado(idEnc, 1);
 			}

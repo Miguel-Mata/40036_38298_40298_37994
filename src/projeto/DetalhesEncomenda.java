@@ -4,12 +4,13 @@
 package projeto;
 
 /**
- * @author migue
+ * @author 40036_38298_40298_37994
  *
  */
 public class DetalhesEncomenda {
 	private Produto produto;
 	private int quantidade;
+
 	/**
 	 * @param produto
 	 * @param quantidade
@@ -19,8 +20,7 @@ public class DetalhesEncomenda {
 		this.quantidade = quantidade;
 	}
 
-	public double calcularPrecoTotal()
-	{
+	public double calcularPrecoTotal() {
 		return this.produto.getPreco() * this.quantidade;
 	}
 

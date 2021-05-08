@@ -3,12 +3,12 @@
  */
 package projeto;
 
-
 import java.time.*;
 import java.util.ArrayList;
 import java.util.Random;
+
 /**
- * @author migue
+ * @author 40036_38298_40298_37994
  *
  */
 public class Encomenda {
@@ -57,11 +57,9 @@ public class Encomenda {
 		this.estado = estado;
 	}
 
-	public double precoTotal()
-	{
+	public double precoTotal() {
 		double var = 0;
-		for(DetalhesEncomenda d: detalhesE)
-		{
+		for (DetalhesEncomenda d : detalhesE) {
 			var += d.calcularPrecoTotal();
 		}
 		return var;
@@ -69,9 +67,8 @@ public class Encomenda {
 
 	@Override
 	public String toString() {
-		return "Encomenda [idEnc=" + idEnc + ", dataLevantamento=" + dataLevantamento + ", precoTotal=" + this.precoTotal()
-		+ ", estado=" + estado + ", detalhesE=" + detalhesE + "]";
+		return "Encomenda [idEnc=" + idEnc + ", dataLevantamento=" + dataLevantamento + ", precoTotal="
+				+ this.precoTotal() + ", estado=" + estado + ", detalhesE=" + detalhesE + "]";
 	}
-
 
 }

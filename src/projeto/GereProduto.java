@@ -3,17 +3,16 @@
  */
 package projeto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author migue
+ * @author 40036_38298_40298_37994
  *
  */
 public class GereProduto {
 	private ArrayList<Produto> produtos;
-	Scanner input = new Scanner (System.in);
+	Scanner input = new Scanner(System.in);
 
 	/**
 	 * @param produtos
@@ -22,19 +21,18 @@ public class GereProduto {
 		produtos = new ArrayList<Produto>();
 	}
 
-
 	public void registarProduto(Produto p) {
 		produtos.add(p);
 	}
 
-	public Produto pesquisarProduto(double id){
+	public Produto pesquisarProduto(double id) {
 
-		if(produtos.isEmpty()) {
+		if (produtos.isEmpty()) {
 			System.out.println("Nao existem produtos");
 			return null;
 		}
-		for(Produto p: produtos) {
-			if(p.getId()==id) {
+		for (Produto p : produtos) {
+			if (p.getId() == id) {
 				return p;
 			}
 		}
@@ -46,23 +44,20 @@ public class GereProduto {
 	public void eliminarProduto(double id) {
 		Produto p = pesquisarProduto(id);
 
-		if(p != null) {
+		if (p != null) {
 			produtos.remove(p);
 		}
 	}
 
-
 	public void imprimirTodos() {
-		if(produtos.isEmpty()) {
+		if (produtos.isEmpty()) {
 			System.out.println("Nao existem produtos");
-		}
-		else{
-			for(Produto p: produtos) {
+		} else {
+			for (Produto p : produtos) {
 				System.out.println(p.toString());
 			}
 		}
 	}
-
 
 	public void imprimirUm(double id) {
 		Produto p = pesquisarProduto(id);
@@ -72,7 +67,7 @@ public class GereProduto {
 	public void adicionarStock(double id, int quant) {
 		Produto p = pesquisarProduto(id);
 
-		if(p!=null) {
+		if (p != null) {
 			p.setStock(p.getStock() + quant);
 		}
 	}
@@ -80,7 +75,7 @@ public class GereProduto {
 	public void removerStock(double id, int quant) {
 		Produto p = pesquisarProduto(id);
 
-		if(p!=null) {
+		if (p != null) {
 			p.setStock(p.getStock() - quant);
 		}
 	}
@@ -88,17 +83,16 @@ public class GereProduto {
 	public void consultarStockEspecifico(double id) {
 		Produto p = pesquisarProduto(id);
 
-		if(p!=null) {
+		if (p != null) {
 			System.out.println(p.toString());
 		}
 	}
-	
+
 	public void imprimirTodoStock() {
-		if(produtos.isEmpty()) {
+		if (produtos.isEmpty()) {
 			System.out.println("Nao existem produtos");
-		}
-		else{
-			for(Produto p: produtos) {
+		} else {
+			for (Produto p : produtos) {
 				System.out.println(p.getStock());
 			}
 		}
@@ -107,12 +101,13 @@ public class GereProduto {
 	public void compararStock(int idProd, int quant) {
 		Produto p = pesquisarProduto(idProd);
 
-		if(p!=null) {
-			if(quant>p.getStock()) {
-				System.out.println("A quantidade excede o stock. Quer:\n1."+ p.getStock() + " unidades\n2.Nenhuma unidade");
+		if (p != null) {
+			if (quant > p.getStock()) {
+				System.out.println(
+						"A quantidade excede o stock. Quer:\n1." + p.getStock() + " unidades\n2.Nenhuma unidade");
 				int op = input.nextInt();
 
-				if(op==1) {
+				if (op == 1) {
 					removerStock(idProd, quant);
 				}
 			}
@@ -120,27 +115,25 @@ public class GereProduto {
 	}
 
 	public void maisVendido() {
-		//TODO fazer
+		// TODO fazer
 	}
 
 	public void consultarPreco(double id) {
 		Produto p = pesquisarProduto(id);
 
-		if(p!=null) {
+		if (p != null) {
 			System.out.println("Preco do produto = " + p.getPreco());
 		}
 	}
-	
+
 	public void imprimirTodoPreco() {
-		if(produtos.isEmpty()) {
+		if (produtos.isEmpty()) {
 			System.out.println("Nao existem produtos");
-		}
-		else{
-			for(Produto p: produtos) {
+		} else {
+			for (Produto p : produtos) {
 				System.out.println(p.getPreco());
 			}
 		}
 	}
-
 
 }

@@ -6,7 +6,7 @@ package projeto;
 import java.time.*;
 
 /**
- * @author migue
+ * @author 40036_38298_40298_37994
  *
  */
 public class Produto {
@@ -32,12 +32,11 @@ public class Produto {
 		this.nome = nome;
 		this.preco = preco;
 		this.stock = stock;
-		this.dataRegisto = LocalDateTime.now();;
+		this.dataRegisto = LocalDateTime.now();
+		;
 		this.dataValidade = dataValidade;
 		this.tipo = tipo;
 	}
-
-
 
 	/**
 	 * @return the id
@@ -46,15 +45,12 @@ public class Produto {
 		return id;
 	}
 
-
 	/**
 	 * @return the dataRegisto
 	 */
 	public LocalDateTime getDataRegisto() {
 		return dataRegisto;
 	}
-
-
 
 	/**
 	 * @return the stock
@@ -63,15 +59,12 @@ public class Produto {
 		return stock;
 	}
 
-
-
 	/**
 	 * @param stock the stock to set
 	 */
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
 
 	/**
 	 * @return the preco
@@ -80,16 +73,10 @@ public class Produto {
 		return preco;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", stock=" + stock + ", dataRegisto="
 				+ dataRegisto + ", dataValidade=" + dataValidade + ", tipo=" + tipo + "]";
 	}
-
-
-
-
 
 }

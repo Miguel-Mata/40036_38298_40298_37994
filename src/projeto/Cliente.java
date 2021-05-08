@@ -6,10 +6,10 @@ package projeto;
 import java.util.ArrayList;
 
 /**
- * @author migue
+ * @author 40036_38298_40298_37994
  *
  */
-public class Cliente extends Utilizador{
+public class Cliente extends Utilizador {
 	private ArrayList<Encomenda> encomendas;
 
 	/**
@@ -27,13 +27,13 @@ public class Cliente extends Utilizador{
 		encomendas.add(e);
 	}
 
-	public Encomenda pesquisarEncomenda(int idEnc){
-		if(encomendas.isEmpty()) {
+	public Encomenda pesquisarEncomenda(int idEnc) {
+		if (encomendas.isEmpty()) {
 			System.out.println("Nao existem encomendas");
 			return null;
 		}
-		for(Encomenda e: encomendas) {
-			if(e.getIdEnc()==idEnc) {
+		for (Encomenda e : encomendas) {
+			if (e.getIdEnc() == idEnc) {
 				return e;
 			}
 		}
@@ -43,13 +43,12 @@ public class Cliente extends Utilizador{
 	}
 
 	public void alterarEstado(int idEnc, int tipo) {
-		for(Encomenda e: encomendas) {
-			if(e.getIdEnc()==idEnc) {
-				if(tipo==1) //Quando regista pagamento
+		for (Encomenda e : encomendas) {
+			if (e.getIdEnc() == idEnc) {
+				if (tipo == 1) // Quando regista pagamento
 				{
 					e.setEstado("Paga");
-				}
-				else //Quando chega dia de entrega
+				} else // Quando chega dia de entrega
 				{
 					e.setEstado("Pronta");
 				}
@@ -60,26 +59,23 @@ public class Cliente extends Utilizador{
 	public void consultarEstado(int idEnc) {
 		Encomenda e = pesquisarEncomenda(idEnc);
 
-		if(e!=null) {
+		if (e != null) {
 			System.out.println(e.getEstado());
 		}
 	}
 
 	public Encomenda historicoCliente() {
-		for(Encomenda e: encomendas) {
+		for (Encomenda e : encomendas) {
 			return e;
 		}
 		return null;
 	}
-	
-	public double melhorCli()
-	{
+
+	public double melhorCli() {
 		double max = 0;
-		
-		for(Encomenda e: encomendas)
-		{
-			if(e.precoTotal()>max)
-			{
+
+		for (Encomenda e : encomendas) {
+			if (e.precoTotal() > max) {
 				max = e.precoTotal();
 			}
 		}
@@ -90,6 +86,5 @@ public class Cliente extends Utilizador{
 	public String toString() {
 		return "Cliente [toString()=" + super.toString() + "]";
 	}
-		
 
 }
