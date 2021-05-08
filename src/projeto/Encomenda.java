@@ -28,7 +28,7 @@ public class Encomenda {
 	public Encomenda(LocalDate dataLevantamento) {
 		idEnc = this.id++;
 		this.dataLevantamento = dataLevantamento;
-		this.estado = "Recebida";
+		this.estado = "Validada";
 		detalhesE = new ArrayList<DetalhesEncomenda>();
 	}
 
@@ -48,6 +48,13 @@ public class Encomenda {
 	 */
 	public String getEstado() {
 		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public double precoTotal()

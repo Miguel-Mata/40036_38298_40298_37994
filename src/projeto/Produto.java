@@ -10,13 +10,14 @@ import java.time.*;
  *
  */
 public class Produto {
-	private double id;
+	private double idProd;
 	private String nome;
 	private double preco;
 	private int stock;
 	private LocalDate dataRegisto;
 	private LocalDate dataValidade;
 	private String tipo;
+	private static int id = 0;
 
 	/**
 	 * @param id
@@ -26,8 +27,8 @@ public class Produto {
 	 * @param dataRegisto
 	 * @param dataValidade
 	 */
-	public Produto(double id, String nome, double preco, int stock, LocalDate dataRegisto, LocalDate dataValidade, String tipo) {
-		this.id = id;
+	public Produto(String nome, double preco, int stock, LocalDate dataRegisto, LocalDate dataValidade, String tipo) {
+		idProd = this.id++;
 		this.nome = nome;
 		this.preco = preco;
 		this.stock = stock;

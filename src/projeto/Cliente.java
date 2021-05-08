@@ -42,8 +42,19 @@ public class Cliente extends Utilizador{
 		return null;
 	}
 
-	public void alterarEstado() {
-		//TODO fazer
+	public void alterarEstado(int idEnc, int tipo) {
+		for(Encomenda e: encomendas) {
+			if(e.getIdEnc()==idEnc) {
+				if(tipo==1) //Quando regista pagamento
+				{
+					e.setEstado("Paga");
+				}
+				else //Quando chega dia de entrega
+				{
+					e.setEstado("Pronta");
+				}
+			}
+		}
 	}
 
 	public void consultarEstado(int idEnc) {
@@ -61,7 +72,7 @@ public class Cliente extends Utilizador{
 		return null;
 	}
 	
-	public void melhorCli()
+	public double melhorCli()
 	{
 		double max = 0;
 		
@@ -72,6 +83,7 @@ public class Cliente extends Utilizador{
 				max = e.precoTotal();
 			}
 		}
+		return max;
 	}
 
 	@Override

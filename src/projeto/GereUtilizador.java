@@ -54,7 +54,7 @@ public class GereUtilizador {
 		}
 	}
 
-	public void imprimirTodos() {
+	public void imprimirTodosUtil() {
 		if(utilizadores.isEmpty()) {
 			System.out.println("Nao existem utilizadores");
 		}
@@ -75,8 +75,25 @@ public class GereUtilizador {
 			}
 		}
 	}
+	
+	public void imprimirTodosEnc() {
+		if(utilizadores.isEmpty()) {
+			System.out.println("Nao existem utilizadores");
+		}
+		else{
+			for(Utilizador u: utilizadores) {
+				if(u instanceof Cliente)
+				{
+					System.out.println("Encomendas");
+					System.out.println(((Cliente) u).historicoCliente());
+				}
+			}
+		}
+	}
+	
+	
 
-	public void imprimirUm(int num) {
+	public void imprimirUmUtil(int num) {
 		Utilizador u = pesquisarUtilizador(num);
 		System.out.println(u.toString());
 	}
@@ -119,7 +136,16 @@ public class GereUtilizador {
 		{
 			if(u instanceof Cliente)
 			{
-				((Cliente) u).melhorCli();
+				System.out.println(((Cliente) u).melhorCli());
+			}
+		}
+	}
+	
+	public void registarPagamento(int idEnc) {
+		for(Utilizador u: utilizadores) {
+			if(u instanceof Cliente) {
+				((Cliente) u).pesquisarEncomenda(idEnc);
+				((Cliente) u).alterarEstado(idEnc, 1);
 			}
 		}
 	}
