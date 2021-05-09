@@ -183,8 +183,7 @@ public class Main {
 		listaUtil.melhorProd();
 	}
 
-	public static void consultarPrecoEspecifico(GereProduto listaProd) {//// funcao para consultar o preco de um produto
-		//// cujo id e dado
+	public static void consultarPrecoEspecifico(GereProduto listaProd) {// funcao para consultar o preco de um produto cujo id e dado
 		System.out.println("Qual o id do produto que quer consultar?");
 		int idProd = input.nextInt();
 
