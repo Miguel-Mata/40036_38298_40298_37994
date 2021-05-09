@@ -35,7 +35,7 @@ public class Produto {
 		this.dataRegisto = LocalDateTime.now();
 		this.dataValidade = dataValidade;
 		this.tipo = tipo;
-		//this.contadorVendas = contadorVendas;
+		// this.contadorVendas = contadorVendas;
 	}
 
 	/**
@@ -80,8 +80,6 @@ public class Produto {
 		return nome;
 	}
 
-	
-
 	/**
 	 * @return the dataValidade
 	 */
@@ -91,8 +89,8 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [idProd=" + idProd + ", nome=" + nome + ", preco=" + preco + ", stock=" + stock + ", dataRegisto="
-				+ dataRegisto + ", dataValidade=" + dataValidade + ", tipo=" + tipo + "]";
+		return "Produto [idProd=" + idProd + ", nome=" + nome + ", preco=" + preco + ", stock=" + stock
+				+ ", dataRegisto=" + dataRegisto + ", dataValidade=" + dataValidade + ", tipo=" + tipo + "]";
 	}
 
 }

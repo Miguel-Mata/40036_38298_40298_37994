@@ -57,7 +57,7 @@ public class Encomenda {
 		this.estado = estado;
 	}
 
-	public double precoTotal() {
+	public double precoTotal() {// calcula e devolve o preco total de uma encomenda
 		double var = 0;
 		for (DetalhesEncomenda d : detalhesE) {
 			var += d.calcularPrecoTotal();
@@ -65,19 +65,19 @@ public class Encomenda {
 		return var;
 	}
 
-	public Produto melhorProd() {
+	public Produto melhorProd() {// devolve o produto mais vendido de uma encomenda
 		int max = 0;
 		Produto p = null;
-		
-		for(DetalhesEncomenda d: detalhesE) {
-			if(d.melhorProd()>max) {
+
+		for (DetalhesEncomenda d : detalhesE) {
+			if (d.melhorProd() > max) {
 				max = d.melhorProd();
 				p = d.getProduto();
 			}
 		}
 		return p;
 	}
-	
+
 	/**
 	 * @return the detalhesE
 	 */

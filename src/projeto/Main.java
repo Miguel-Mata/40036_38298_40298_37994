@@ -15,26 +15,30 @@ public class Main {
 	public static Scanner inputString = new Scanner(System.in);
 
 	// INICIO FUNCOES CLIENTE
-	public static void pesquisarProduto(GereProduto listaProd) {
+	public static void pesquisarProduto(GereProduto listaProd) {// funcao para pesquisar um produto cujo id e dado
 		System.out.println("Qual o id do produto que pretende procurar?");
 		int id = input.nextInt();
 
 		listaProd.imprimirUm(id);
 	}
 
-	public static void imprimirTodosProdutos(GereProduto listaProd) {
+	public static void imprimirTodosProdutos(GereProduto listaProd) {// funcao para imprimir todos os produtos
 		listaProd.imprimirTodos();
 	}
 
-	public static void detalhesCliente(GereUtilizador listaUtil, int numUtil) {
+	public static void detalhesCliente(GereUtilizador listaUtil, int numUtil) {// funcao para imprimir os detalhes de um
+		// cliente cujo id e dado
 		listaUtil.imprimirUmUtil(numUtil);
 	}
 
-	public static void consultarHistorico(GereUtilizador listaUtil, int numeroUtil) {
+	public static void consultarHistorico(GereUtilizador listaUtil, int numeroUtil) {// funcao para consultar historico
+		// de encomendas de um cliente
+		// cujo id e dado
 		listaUtil.consultarHistoricoUm(numeroUtil);
 	}
 
-	public static void consultarEstado(GereUtilizador listaUtil) {
+	public static void consultarEstado(GereUtilizador listaUtil) {// funcao para consultar o estado de uma encomeda cujo
+		// id e dado
 		System.out.println("Qual o id da encomenda que quer consultar");
 		int id = input.nextInt();
 
@@ -42,64 +46,66 @@ public class Main {
 
 	}
 
-	public static void realizarEncomenda(GereUtilizador listaUtil, GereProduto listaProd, int numeroUtil) {
+	public static void realizarEncomenda(GereUtilizador listaUtil, GereProduto listaProd, int numeroUtil) {// funcao
+		// para
+		// realizar
+		// uma
+		// encomenda
 		System.out.println("A realizar encomenda");
 
 		Encomenda newEncomenda;
-		
 
 		System.out.println("Quantos produtos diferentes quer");
 		int prods = input.nextInt();
-		
+
 		System.out.println("Qual a data para levantar? Formato AAAA-MM-DD. Minimo 24h");
 		String data = inputString.next();
 		LocalDate date = LocalDate.parse(data);
-		
+
 		newEncomenda = new Encomenda(date);
 
 		for (int i = 0; i < prods; i++) {
-			
+
 			listaProd.imprimirTodos();
 
 			System.out.println("Qual o ID do produto que quer?");
 			int id = input.nextInt();
-			
+
 			Produto p = listaProd.pesquisarProduto(id);
 
 			System.out.println("Qual a quantidade do produto que quer?");
 			int quant = input.nextInt();
-			
-			if(listaProd.compararStock(id, quant)) {
+
+			if (listaProd.compararStock(id, quant)) {
 				DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, quant);
-				
+
 				listaProd.removerStock(id, quant);
-				
+
 				newEncomenda.registarDetalhes(newDetalhes);
-			}
-			else {
-				System.out.println("A quantidade excede o stock. Quer:\n1." + p.getStock() + " unidades\n2.Nenhuma unidade");
+			} else {
+				System.out.println(
+						"A quantidade excede o stock. Quer:\n1." + p.getStock() + " unidades\n2.Nenhuma unidade");
 				int op = input.nextInt();
-				
+
 				if (op == 1) {
 					quant = p.getStock();
-					
+
 					listaProd.removerStock(id, p.getStock());
-					
+
 					DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, quant);
-					
+
 					newEncomenda.registarDetalhes(newDetalhes);
 				}
 			}
 		}
-		if(newEncomenda.getDetalhesE().size()!=0) {
+		if (newEncomenda.getDetalhesE().size() != 0) {
 			listaUtil.realizarEncomenda(newEncomenda, numeroUtil);
-		}
-		else {
+		} else {
 			System.out.println("Encomenda vazia - Nao validada");
 		}
 	}
 
-	public static void trataCliente(GereUtilizador listaUtil, GereProduto listaProd) {
+	public static void trataCliente(GereUtilizador listaUtil, GereProduto listaProd) {// funcao para o menu do cliente
 
 		System.out.println("Qual o numero utilizador?");
 		int numeroUtil = input.nextInt();
@@ -151,8 +157,8 @@ public class Main {
 					Main.detalhesCliente(listaUtil, numeroUtil);
 				}
 				break;
-				
-				case 7:{
+
+				case 7: {
 					Main.melhorProd(listaUtil);
 				}
 				break;
@@ -173,22 +179,23 @@ public class Main {
 	// FIM FUNCOES CLIENTE
 
 	// INICIO FUNCOES FUNCIONARIO
-	public static void melhorProd(GereUtilizador listaUtil) {
+	public static void melhorProd(GereUtilizador listaUtil) {// funcao para imprimir o melhor produto
 		listaUtil.melhorProd();
 	}
-	
-	public static void consultarPrecoEspecifico(GereProduto listaProd) {
+
+	public static void consultarPrecoEspecifico(GereProduto listaProd) {//// funcao para consultar o preco de um produto
+		//// cujo id e dado
 		System.out.println("Qual o id do produto que quer consultar?");
 		int idProd = input.nextInt();
 
 		listaProd.consultarPreco(idProd);
 	}
 
-	public static void imprimirTodoPreco(GereProduto listaProd) {
+	public static void imprimirTodoPreco(GereProduto listaProd) {// funcao para imprimir o preco de todos os produtos
 		listaProd.imprimirTodoPreco();
 	}
 
-	public static void atualizarStock(GereProduto listaProd) {
+	public static void atualizarStock(GereProduto listaProd) {// funcao para atualizar stock de um dado produto
 		System.out.println("Pretende:\n1. Adicionar Stock\n 2. Removar stock");
 		int escolha = input.nextInt();
 
@@ -211,60 +218,65 @@ public class Main {
 		}
 	}
 
-	public static void imprimirTodoStock(GereProduto listaProd) {
+	public static void imprimirTodoStock(GereProduto listaProd) {// funcao para imprimir o stock de todos os produtos
 		listaProd.imprimirTodoStock();
 	}
 
-	public static void eliminarProduto(GereProduto listaProd) {
+	public static void eliminarProduto(GereProduto listaProd) {// funcao para eliminar um produto cujo seu id e dado
 		System.out.println("Qual o id do produto que quer eliminar?");
 		int idProd = input.nextInt();
 
 		listaProd.eliminarProduto(idProd);
 	}
 
-	public static void consultarStockEspecifico(GereProduto listaProd) {
+	public static void consultarStockEspecifico(GereProduto listaProd) {//// funcao para consultar o stock de um produto
+		//// cujo id e dado
 		System.out.println("Qual o id do produto que quer consultar?");
 		int idProd = input.nextInt();
 
 		listaProd.consultarStockEspecifico(idProd);
 	}
 
-	public static void registarPagamento(GereUtilizador listaUtil) {
+	public static void registarPagamento(GereUtilizador listaUtil) {// funcao para registar pagamento de uma encomenda
+		// cujo id e dado
 		System.out.println("Qual o numero da encomenda que pretende pagar?");
 		int idEnc = input.nextInt();
 
 		listaUtil.registarPagamento(idEnc);
 	}
 
-	public static void imprimirTodasEncomendas(GereUtilizador listaUtil) {
+	public static void imprimirTodasEncomendas(GereUtilizador listaUtil) {// funcao para imprimir todas as encomendas
 		System.out.println("A imprimir encomendas");
 		listaUtil.imprimirTodosEnc();
 	}
 
-	public static void consultarHistoricoEspecifico(GereUtilizador listaUtil) {
+	public static void consultarHistoricoEspecifico(GereUtilizador listaUtil) {// funcao para consultar historico de
+		// encomendas de um dado utilizador cujo
+		// id e dado
 		System.out.println("Qual o numero de utilizador que pretende consultar?");
 		int num = input.nextInt();
 
 		listaUtil.consultarHistoricoUm(num);
 	}
 
-	public static void imprimirTodosUtil(GereUtilizador listaUtil) {
+	public static void imprimirTodosUtil(GereUtilizador listaUtil) {// funcao para imprimir todos os utilizadores
 		System.out.println("A imprimir todos utilizadores");
 		listaUtil.imprimirTodosUtil();
 	}
 
-	public static void imprimirUmUtil(GereUtilizador listaUtil) {
+	public static void imprimirUmUtil(GereUtilizador listaUtil) {//// funcao para imprimir um utilizador cujo id e dado
 		System.out.println("Qual o numero de utilizador que pretende procurar?");
 		int num = input.nextInt();
 
 		listaUtil.imprimirUmUtil(num);
 	}
 
-	public static void melhorCliente(GereUtilizador listaUtil) {
+	public static void melhorCliente(GereUtilizador listaUtil) {// funcao para imprimir o melhor cliente
 		listaUtil.melhorCliente();
 	}
 
-	public static void registaPrimeiro(GereUtilizador listaUtil) {
+	public static void registaPrimeiro(GereUtilizador listaUtil) {// funcao para registar o primeiro utilizador do
+		// sistema que e um funcionario
 		Utilizador novoUtil;
 		System.out.println("A registar o primeiro funcionario");
 
@@ -284,7 +296,7 @@ public class Main {
 		System.out.println("Funcionario registado com sucesso");
 	}
 
-	public static void registarCliente(GereUtilizador listaUtil) {
+	public static void registarCliente(GereUtilizador listaUtil) {// funcao para registar um cliente
 		Utilizador novoUtil;
 
 		System.out.println("Qual o numero do utilizador");
@@ -306,18 +318,18 @@ public class Main {
 		}
 
 		listaUtil.registarUtilizador(novoUtil);
-		
+
 		System.out.println("Cliente registado com sucesso");
 	}
 
-	public static void eliminarCliente(GereUtilizador listaUtil) {
+	public static void eliminarCliente(GereUtilizador listaUtil) {// funcao para eliminar um cliente
 		System.out.println("Qual o numero do utilizador que pretende eliminar?");
 		int num = input.nextInt();
 
 		listaUtil.eliminarUtilizador(num);
 	}
 
-	public static void registarProduto(GereProduto listaProd) {
+	public static void registarProduto(GereProduto listaProd) {// funcao para registar um produto
 		Produto novoProd;
 
 		System.out.println("Qual o nome do produto");
@@ -328,12 +340,12 @@ public class Main {
 
 		System.out.println("Qual o stock do produto?");
 		int stock = input.nextInt();
-		
+
 		System.out.println("Qual a data de validade do produto? Formato AAAA-MM-DDh");
 		String dataValidade = inputString.next();
 		LocalDate date = LocalDate.parse(dataValidade);
-		
-		while(listaProd.produtoExpirado(date)==false) {
+
+		while (listaProd.produtoExpirado(date) == false) {
 			System.out.println("Qual a data de validade do produto? Formato AAAA-MM-DDh");
 			dataValidade = inputString.next();
 			date = LocalDate.parse(dataValidade);
@@ -350,7 +362,7 @@ public class Main {
 
 	}
 
-	public static void trataFunc(GereUtilizador listaUtil, GereProduto listaProd) {
+	public static void trataFunc(GereUtilizador listaUtil, GereProduto listaProd) {// funcao para o menu do funcionario
 
 		System.out.println("\nLogin\n");
 
@@ -505,12 +517,12 @@ public class Main {
 				System.out.println("0. Terminar sessão");
 				System.out.println("Introduza opção:");
 				op = input.nextInt();
-			}//fim while
+			} // fim while
 		}
 	}
 	// FIM FUNCOES FUNCIONARIO
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {// inicio main
 		GereUtilizador listaUtil = new GereUtilizador();
 		GereProduto listaProd = new GereProduto();
 
@@ -539,5 +551,5 @@ public class Main {
 			System.out.println("1.Cliente\n2.Funcionário\n0.Sair");
 			op1 = input.nextInt();
 		} // fim while
-	}
-}// fim main//fim classe
+	}// fim main
+}// fim classe

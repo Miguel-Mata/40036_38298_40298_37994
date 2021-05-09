@@ -19,7 +19,7 @@ public class DetalhesEncomenda {
 		this.produto = produto;
 		this.quantidade = quantidade;
 	}
-	
+
 	public int melhorProd() {
 		return this.quantidade;
 	}
@@ -31,7 +31,7 @@ public class DetalhesEncomenda {
 		return produto;
 	}
 
-	public double calcularPrecoTotal() {
+	public double calcularPrecoTotal() {// calcula e devolve o preco de um produto vezes a quantidade dada
 		return this.produto.getPreco() * this.quantidade;
 	}
 
@@ -39,5 +39,5 @@ public class DetalhesEncomenda {
 	public String toString() {
 		return "DetalhesEncomenda [produto=" + produto.getNome() + ", quantidade=" + quantidade + "]";
 	}
-	
+
 }

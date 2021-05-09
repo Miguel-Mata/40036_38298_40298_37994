@@ -28,8 +28,6 @@ public class Utilizador {
 	public int getNumeroUtil() {
 		return numeroUtil;
 	}
-	
-	
 
 	/**
 	 * @return the nome
