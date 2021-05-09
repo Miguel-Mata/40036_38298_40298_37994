@@ -19,9 +19,25 @@ public class DetalhesEncomenda {
 		this.produto = produto;
 		this.quantidade = quantidade;
 	}
+	
+	public int melhorProd() {
+		return this.quantidade;
+	}
+
+	/**
+	 * @return the produto
+	 */
+	public Produto getProduto() {
+		return produto;
+	}
 
 	public double calcularPrecoTotal() {
 		return this.produto.getPreco() * this.quantidade;
 	}
 
+	@Override
+	public String toString() {
+		return "DetalhesEncomenda [produto=" + produto.getNome() + ", quantidade=" + quantidade + "]";
+	}
+	
 }

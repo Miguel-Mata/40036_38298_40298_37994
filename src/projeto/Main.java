@@ -31,7 +31,7 @@ public class Main {
 	}
 
 	public static void consultarHistorico(GereUtilizador listaUtil, int numeroUtil) {
-		listaUtil.consultarHistorico(numeroUtil);
+		listaUtil.consultarHistoricoUm(numeroUtil);
 	}
 
 	public static void consultarEstado(GereUtilizador listaUtil) {
@@ -72,6 +72,8 @@ public class Main {
 			if(listaProd.compararStock(id, quant)) {
 				DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, quant);
 				
+				listaProd.removerStock(id, quant);
+				
 				newEncomenda.registarDetalhes(newDetalhes);
 			}
 			else {
@@ -79,9 +81,11 @@ public class Main {
 				int op = input.nextInt();
 				
 				if (op == 1) {
+					quant = p.getStock();
+					
 					listaProd.removerStock(id, p.getStock());
 					
-					DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, p.getStock());
+					DetalhesEncomenda newDetalhes = new DetalhesEncomenda(p, quant);
 					
 					newEncomenda.registarDetalhes(newDetalhes);
 				}
@@ -110,7 +114,8 @@ public class Main {
 			System.out.println("4. Consultar estado encomenda");
 			System.out.println("5. Consultar histórico encomendas do cliente");
 			System.out.println("6. Imprimir detalhes do cliente");
-			System.out.println("0. Terminar");
+			System.out.println("7. Produto mais vendido");
+			System.out.println("0. Terminar sessão");
 			System.out.println("Introduza opção:");
 			int op;
 			op = input.nextInt();
@@ -146,6 +151,11 @@ public class Main {
 					Main.detalhesCliente(listaUtil, numeroUtil);
 				}
 				break;
+				
+				case 7:{
+					Main.melhorProd(listaUtil);
+				}
+				break;
 				}
 				System.out.println("1. Realizar Encomenda");
 				System.out.println("2. Imprimir lista de produtos");
@@ -153,7 +163,8 @@ public class Main {
 				System.out.println("4. Consultar estado encomenda");
 				System.out.println("5. Consultar histórico encomendas do cliente");
 				System.out.println("6. Imprimir detalhes do cliente");
-				System.out.println("0. Terminar");
+				System.out.println("7. Produto mais vendido");
+				System.out.println("0. Terminar sessão");
 				System.out.println("Introduza opção:");
 				op = input.nextInt();
 			}
@@ -162,6 +173,10 @@ public class Main {
 	// FIM FUNCOES CLIENTE
 
 	// INICIO FUNCOES FUNCIONARIO
+	public static void melhorProd(GereUtilizador listaUtil) {
+		listaUtil.melhorProd();
+	}
+	
 	public static void consultarPrecoEspecifico(GereProduto listaProd) {
 		System.out.println("Qual o id do produto que quer consultar?");
 		int idProd = input.nextInt();
@@ -230,7 +245,7 @@ public class Main {
 		System.out.println("Qual o numero de utilizador que pretende consultar?");
 		int num = input.nextInt();
 
-		listaUtil.consultarHistorico(num);
+		listaUtil.consultarHistoricoUm(num);
 	}
 
 	public static void imprimirTodosUtil(GereUtilizador listaUtil) {
@@ -291,6 +306,8 @@ public class Main {
 		}
 
 		listaUtil.registarUtilizador(novoUtil);
+		
+		System.out.println("Cliente registado com sucesso");
 	}
 
 	public static void eliminarCliente(GereUtilizador listaUtil) {
@@ -311,10 +328,16 @@ public class Main {
 
 		System.out.println("Qual o stock do produto?");
 		int stock = input.nextInt();
-
+		
 		System.out.println("Qual a data de validade do produto? Formato AAAA-MM-DDh");
 		String dataValidade = inputString.next();
 		LocalDate date = LocalDate.parse(dataValidade);
+		
+		while(listaProd.produtoExpirado(date)==false) {
+			System.out.println("Qual a data de validade do produto? Formato AAAA-MM-DDh");
+			dataValidade = inputString.next();
+			date = LocalDate.parse(dataValidade);
+		}
 
 		System.out.println("Qual o tipo de produto? Horticola ou Fruticola");
 		String tipo = inputString.next();
@@ -359,7 +382,7 @@ public class Main {
 			System.out.println("16. Imprimir todos os produtos");
 			System.out.println("17. Imprimir um produto");
 			System.out.println("18. Produto mais vendido");
-			System.out.println("0. Terminar");
+			System.out.println("0. Terminar sessão");
 			System.out.println("Introduza opção:");
 			int op = input.nextInt();
 
@@ -451,7 +474,7 @@ public class Main {
 				break;
 
 				case 18: {
-					// TODO
+					Main.melhorProd(listaUtil);
 				}
 				break;
 
@@ -479,7 +502,7 @@ public class Main {
 				System.out.println("16. Imprimir todos os produtos");
 				System.out.println("17. Imprimir um produto");
 				System.out.println("18. Produto mais vendido");
-				System.out.println("0. Terminar");
+				System.out.println("0. Terminar sessão");
 				System.out.println("Introduza opção:");
 				op = input.nextInt();
 			}//fim while
@@ -493,7 +516,7 @@ public class Main {
 
 		Main.registaPrimeiro(listaUtil);
 
-		System.out.println("1.Cliente\n2.Funcionário\n0. sair");
+		System.out.println("\n1.Cliente\n2.Funcionário\n0.Sair");
 		int op1 = input.nextInt();
 
 		while (op1 != 0) {
@@ -513,7 +536,7 @@ public class Main {
 			}
 			}// fim switch
 
-			System.out.println("1.Cliente\n2.Funcionário\n0. sair");
+			System.out.println("1.Cliente\n2.Funcionário\n0.Sair");
 			op1 = input.nextInt();
 		} // fim while
 	}

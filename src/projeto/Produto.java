@@ -17,7 +17,7 @@ public class Produto {
 	private LocalDateTime dataRegisto;
 	private LocalDate dataValidade;
 	private String tipo;
-	private static int id = 0;
+	private static int id = 1;
 
 	/**
 	 * @param id
@@ -33,16 +33,16 @@ public class Produto {
 		this.preco = preco;
 		this.stock = stock;
 		this.dataRegisto = LocalDateTime.now();
-		;
 		this.dataValidade = dataValidade;
 		this.tipo = tipo;
+		//this.contadorVendas = contadorVendas;
 	}
 
 	/**
 	 * @return the id
 	 */
 	public double getId() {
-		return id;
+		return idProd;
 	}
 
 	/**
@@ -73,9 +73,25 @@ public class Produto {
 		return preco;
 	}
 
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	
+
+	/**
+	 * @return the dataValidade
+	 */
+	public LocalDate getDataValidade() {
+		return dataValidade;
+	}
+
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", stock=" + stock + ", dataRegisto="
+		return "Produto [idProd=" + idProd + ", nome=" + nome + ", preco=" + preco + ", stock=" + stock + ", dataRegisto="
 				+ dataRegisto + ", dataValidade=" + dataValidade + ", tipo=" + tipo + "]";
 	}
 

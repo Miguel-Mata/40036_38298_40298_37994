@@ -16,7 +16,7 @@ public class Encomenda {
 	private LocalDate dataLevantamento;
 	private String estado;
 	private ArrayList<DetalhesEncomenda> detalhesE;
-	private static int id = 0;
+	private static int id = 1;
 
 	/**
 	 * @param dataLevantamento
@@ -65,7 +65,18 @@ public class Encomenda {
 		return var;
 	}
 
-	
+	public Produto melhorProd() {
+		int max = 0;
+		Produto p = null;
+		
+		for(DetalhesEncomenda d: detalhesE) {
+			if(d.melhorProd()>max) {
+				max = d.melhorProd();
+				p = d.getProduto();
+			}
+		}
+		return p;
+	}
 	
 	/**
 	 * @return the detalhesE

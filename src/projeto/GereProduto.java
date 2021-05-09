@@ -3,6 +3,7 @@
  */
 package projeto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,12 +78,20 @@ public class GereProduto {
 
 		if (p != null) {
 			p.setStock(p.getStock() - quant);
+			
+			if(p.getStock()==0) {
+				eliminarProduto(id);
+			}
 		}
 	}
 
 	public void consultarStockEspecifico(double id) {
+		for(Produto p1 : produtos) {
+			System.out.println("Produto [id=" + p1.getId() + ", nome=" + p1.getNome() + "]");
+		}
+		
 		Produto p = pesquisarProduto(id);
-
+		
 		if (p != null) {
 			System.out.println(p.toString());
 		}
@@ -93,7 +102,7 @@ public class GereProduto {
 			System.out.println("Nao existem produtos");
 		} else {
 			for (Produto p : produtos) {
-				System.out.println(p.getStock());
+				System.out.println("Produto [id=" + p.getId() + ", nome=" + p.getNome() + ", stock=" + p.getStock());
 			}
 		}
 	}
@@ -110,26 +119,35 @@ public class GereProduto {
 		return false;
 	}
 
-	public void maisVendido() {
-		// TODO fazer
-	}
-
 	public void consultarPreco(double id) {
+		for(Produto p1 : produtos) {
+			System.out.println("Produto [id=" + p1.getId() + ", nome=" + p1.getNome() + "]");
+		}
+		
 		Produto p = pesquisarProduto(id);
 
 		if (p != null) {
 			System.out.println("Preco do produto = " + p.getPreco());
 		}
 	}
+	
 
 	public void imprimirTodoPreco() {
 		if (produtos.isEmpty()) {
 			System.out.println("Nao existem produtos");
 		} else {
 			for (Produto p : produtos) {
-				System.out.println(p.getPreco());
+				System.out.println("Produto [id=" + p.getId() + ", nome=" + p.getNome() + ", preco=" + p.getPreco());
 			}
 		}
+	}
+	
+	public boolean produtoExpirado(LocalDate date) {		
+			if(date.isBefore(LocalDate.now())) {
+				System.out.println("Data invalida");
+				return false;
+			}
+		return true;
 	}
 
 }

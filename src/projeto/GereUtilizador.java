@@ -19,7 +19,6 @@ public class GereUtilizador {
 	public void registarUtilizador(Utilizador u) {
 		if(!verificarIdUtil(u.getNumeroUtil())) {
 			utilizadores.add(u);
-			System.out.println("Utilizador registado com sucesso");
 		}
 	}
 	
@@ -72,6 +71,10 @@ public class GereUtilizador {
 	}
 
 	public void eliminarUtilizador(int numUtil) {
+		for(Utilizador u1 : utilizadores) {
+			System.out.println("Utilizador [numeroUtil=" + u1.getNumeroUtil() + ", nome=" + u1.getNome() + "]");
+		}
+		
 		Utilizador u = pesquisarUtilizador(numUtil);
 
 		if (u != null) {
@@ -87,10 +90,8 @@ public class GereUtilizador {
 
 			for (Utilizador u : utilizadores) {
 				if (u instanceof Cliente) {
-					System.out.println("Clientes");
 					System.out.println(u.toString());
 				} else {
-					System.out.println("Funcionarios");
 					System.out.println(u.toString());
 				}
 
@@ -105,7 +106,7 @@ public class GereUtilizador {
 			for (Utilizador u : utilizadores) {
 				if (u instanceof Cliente) {
 					System.out.println("Encomendas");
-					System.out.println(((Cliente) u).historicoCliente());
+					((Cliente) u).historicoCliente();
 				}
 			}
 		}
@@ -116,17 +117,19 @@ public class GereUtilizador {
 		System.out.println(u.toString());
 	}
 
-	public void consultarHistorico(int numUtil) {
+	public void consultarHistoricoUm(int numUtil) {	
 		for (Utilizador u : utilizadores) {
 			if (u instanceof Cliente) {
 				if (u.getNumeroUtil() == numUtil) {
-					System.out.println(((Cliente) u).historicoCliente());
+					((Cliente) u).historicoCliente();
 				}
 			}
 		}
 	}
 
 	public void consultarEstado(int id) {
+		consultarHistoricoUm(id);
+		
 		for (Utilizador u : utilizadores) {
 			if (u instanceof Cliente) {
 				((Cliente) u).consultarEstado(id);
@@ -162,7 +165,20 @@ public class GereUtilizador {
 		System.out.println("O melhor cliente foi o " + numMax + " cujo nome e " + nomeMax + " e gastou " + precoMax);
 	}
 
+	public void melhorProd() {
+		Produto p = null;
+		
+		for(Utilizador u: utilizadores) {
+			if(u instanceof Cliente) {
+				p = ((Cliente) u).melhorProd();
+			}
+		}
+		System.out.println("O melhor produto foi: " + p.toString());
+	}
+	
 	public void registarPagamento(int idEnc) {
+		imprimirTodosEnc();
+		
 		for (Utilizador u : utilizadores) {
 			if (u instanceof Cliente) {
 				((Cliente) u).pesquisarEncomenda(idEnc);

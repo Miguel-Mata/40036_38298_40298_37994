@@ -31,6 +31,7 @@ public class Cliente extends Utilizador {
 		if (encomendas.isEmpty()) {
 			System.out.println("Nao existem encomendas");
 			return null;
+			
 		}
 		for (Encomenda e : encomendas) {
 			if (e.getIdEnc() == idEnc) {
@@ -64,11 +65,10 @@ public class Cliente extends Utilizador {
 		}
 	}
 
-	public Encomenda historicoCliente() {
+	public void historicoCliente() {
 		for (Encomenda e : encomendas) {
-			return e;
+			System.out.println(e);
 		}
-		return null;
 	}
 
 	public double calcularTotalEncomendasCliente() {
@@ -79,10 +79,19 @@ public class Cliente extends Utilizador {
 		}
 		return soma;
 	}
+	
+	public Produto melhorProd() {
+		Produto p = null;
+		
+		for(Encomenda e: encomendas) {
+			p = e.melhorProd();
+		}
+		return p;
+	}
 
 	@Override
 	public String toString() {
-		return "Cliente [toString()=" + super.toString() + "]";
+		return "Cliente [" + super.toString() + "]";
 	}
 
 }
